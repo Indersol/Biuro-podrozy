@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -26,7 +27,9 @@ namespace Biuro_Podróży.Models
         public decimal Cena { get; set; }
         [Required(ErrorMessage = "Opis jest wymagany!")]
         public string Opis { get; set; }
+        [ForeignKey("Jedzenie")]
         public int Id_jedzenia{ get; set; }
+        [ForeignKey("Zakwaterowanie")]
         public int Id_zakwaterowania { get; set; }
         public virtual Jedzenie Jedzenie { get; set; }
         public virtual Zakwaterowanie Zakwaterowanie { get; set; }

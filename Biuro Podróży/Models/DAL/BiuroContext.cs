@@ -19,7 +19,7 @@ namespace Biuro_Podróży.Models
         public DbSet<Wycieczka_Klient> Wycieczka_Klient { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.Entity<User>().HasIndex(u => u.Login).IsUnique();
+            builder.Entity<User>().HasIndex(i => i.Login).IsUnique();
             builder.Entity<User>().HasIndex(u => u.Email).IsUnique();
         }
 
