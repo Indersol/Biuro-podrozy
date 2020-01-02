@@ -12,6 +12,7 @@ namespace Biuro_Podróży.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id_usera { get; set; }
+        [Required(ErrorMessage = "Login jest wymagany!")]
         public string Login { get; set; }
 
         [Required(ErrorMessage = "Hasło jest wymagane!")]
