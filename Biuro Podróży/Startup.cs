@@ -63,7 +63,8 @@ namespace Biuro_Podróży
             using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
             {
                 var context = serviceScope.ServiceProvider.GetRequiredService<BiuroContext>();
-                //context.Database.Migrate();
+                
+                context.Database.Migrate();
             }
 
             app.UseMvc(routes =>

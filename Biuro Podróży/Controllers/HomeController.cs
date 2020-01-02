@@ -12,6 +12,7 @@ namespace Biuro_Podróży.Controllers
     {
         public IActionResult Index()
         {
+            
             return View();
         }
 

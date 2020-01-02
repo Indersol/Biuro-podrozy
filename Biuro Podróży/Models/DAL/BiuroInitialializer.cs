@@ -61,11 +61,14 @@ namespace Biuro_Podróży.Models
             var wycieczki = new Wycieczka[]
             {
                 new Wycieczka {Miejsce = "San Escobar", Data_start = DateTime.Parse("2020-01-01"), Data_end = DateTime.Parse("2020-01-05"),
-                    Opis = "Zapraszamy na wycieczkę do słonecznego San Ecsobar.", Cena = 2500, },
+                    Opis = "Zapraszamy na wycieczkę do słonecznego San Ecsobar.", Cena = 2500, Id_jedzenia = posilki.Single(p => p.Nazwa == "Brak").Id_jedzenia,
+                    Id_zakwaterowania = hotele.Single(h => h.Nazwa == "Brak").Id_zakwaterowania },
                 new Wycieczka {Miejsce = "San Pablo", Data_start = DateTime.Parse("2020-01-06"), Data_end = DateTime.Parse("2020-01-09"),
-                    Opis = "Zapraszamy na wycieczkę do słonecznego San Pablo.", Cena = 1500, },
+                    Opis = "Zapraszamy na wycieczkę do słonecznego San Pablo.", Cena = 1500, Id_jedzenia = posilki.Single(p => p.Nazwa == "Brak").Id_jedzenia,
+                    Id_zakwaterowania = hotele.Single(h => h.Nazwa == "Brak").Id_zakwaterowania },
                 new Wycieczka {Miejsce = "Prypyat", Data_start = DateTime.Parse("2020-01-09"), Data_end = DateTime.Parse("2020-01-11"),
-                    Opis = "Zapraszamy na wycieczkę do sarkofagu", Cena = 1200, },
+                    Opis = "Zapraszamy na wycieczkę do sarkofagu", Cena = 1200, Id_jedzenia = posilki.Single(p => p.Nazwa == "Brak").Id_jedzenia,
+                    Id_zakwaterowania = hotele.Single(h => h.Nazwa == "Brak").Id_zakwaterowania },
 
             };
             foreach (Wycieczka w in wycieczki)
