@@ -35,9 +35,8 @@ namespace Biuro_Podróży
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            var connection = @"Server=(localdb)\mssqllocaldb;Database=Baza;Trusted_Connection=True;ConnectRetryCount=0";
-            services.AddDbContext<BiuroContext>
-                (options => options.UseSqlServer(connection));
+            var connection = @"Server=(localdb)\mssqllocaldb;Database=Biuro;Trusted_Connection=True;ConnectRetryCount=0";
+            services.AddDbContext<BiuroContext>(options => options.UseSqlServer(connection));
 
             services.AddSession(s => s.IdleTimeout = TimeSpan.FromMinutes(30));
             services.AddHttpContextAccessor();

@@ -5,6 +5,7 @@ namespace Biuro_Podróży.Models
 {
     public class Zakwaterowanie
     {
+        [Key]
         public int Id_zakwaterowania { get; set; }
         [Required(ErrorMessage = "Nazwa opcji jest wymagana!")]
         [StringLength(50)]
