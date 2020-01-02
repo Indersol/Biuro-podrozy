@@ -31,7 +31,13 @@ namespace Biuro_Podróży.Models
         public string Nazwisko { get; set; }
         public string Miejscowosc { get; set; }
         public string Telefon { get; set; }
-        public virtual ICollection<Uprawnienia> Id_uprawnien { get; set; }
+        public Uprawnienia Uprawnienia { get; set; }
 
+    }
+    public enum Uprawnienia
+    {
+        Admin,
+        Moderator,
+        Klient
     }
 }
