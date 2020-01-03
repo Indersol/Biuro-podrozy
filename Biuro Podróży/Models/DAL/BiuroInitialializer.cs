@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,6 +12,7 @@ namespace Biuro_Podróży.Models
         //nie działa. Trzeba uzupełniać bazę ręcznie po uruchomieniu aplikacji na nowym komputerze. Nie kasuję bo może coś jeszcze wymyślimy.
         public static void Initialize(BiuroContext context)
         {
+            //using (var context = new BiuroContext(serviceProvider.GetRequiredService<DbContextOptions<BiuroInitialializer>>())) {
             if(context.User.Any())
             {
                 return;
@@ -90,6 +93,8 @@ namespace Biuro_Podróży.Models
             }
             context.SaveChanges();
 
-        }
+            }
+       // }
+
     }
 }

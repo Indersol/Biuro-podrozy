@@ -40,8 +40,8 @@ namespace Biuro_Podróży.Models
     }
     public enum Uprawnienia
     {
-        Admin,
+        Klient,
         Moderator,
-        Klient
+        Admin
     }
 }

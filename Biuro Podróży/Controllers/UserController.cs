@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Biuro_Podróży.Controllers
 {
-    public class KlientController : Controller
+    public class UserController : Controller
     {
         private readonly BiuroContext _context;
         // GET: Klient
-        public KlientController(BiuroContext context)
+        public UserController(BiuroContext context)
         {
             _context = context;
         }
@@ -91,8 +91,10 @@ namespace Biuro_Podróży.Controllers
                     HttpContext.Session.SetInt32("UID", klient.Id_usera);
                     HttpContext.Session.SetString("ULogin", klient.Login.ToString());
                     HttpContext.Session.SetInt32("Login", 1);
+                    HttpContext.Session.SetString("Tryb", klient.Uprawnienia.ToString());
                     TempData["UID"] = klient.Id_usera.ToString();
                     ViewData["ULogin"] = klient.Login.ToString();
+                    ViewData["Tryb"] = klient.Uprawnienia.ToString();
                     ViewData["Login"] = true;
                     return RedirectToAction("Index", "Home", new { area = "" });
                 }
@@ -107,6 +109,7 @@ namespace Biuro_Podróży.Controllers
         {
             HttpContext.Session.Remove("Login");
             HttpContext.Session.Remove("UID");
+            HttpContext.Session.Remove("Tryb");
             HttpContext.Session.Remove("ULogin");
             return RedirectToAction("Index", "Home", new { area = "" });
         }

@@ -3,8 +3,7 @@
 @{
     ViewData["Title"] = "Panel użytkownika";
 }
-<h2>Panel użytkownika @Context.Session.GetString("UserEmail")</h2>
-
+<h2>Panel użytkownika @Context.Session.GetString("ULogin")</h2>
 <table class="table">
     <thead>
         <tr>
@@ -58,7 +57,7 @@
                 @Html.DisplayFor(modelItem => item.Zakwaterowanie.Nazwa)
             </td>
             <td>
-                <a asp-action="Details" asp-route-id="@item.Id_wycieczki">Szczegóły</a>
+                <a asp-action="Details" asp-controller="Moderator" asp-route-id="@item.Id_wycieczki">Szczegóły</a>
             </td>
         </tr>
         }

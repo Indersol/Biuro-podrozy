@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Biuro_Podróży.Models.Wycieczka>
+﻿@using Microsoft.AspNetCore.Http;
+@model IEnumerable<Biuro_Podróży.Models.Wycieczka>
 @{
     ViewData["Title"] = "Strona Główna";
 }
@@ -54,6 +55,9 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Zakwaterowanie.Nazwa)
+                </td>
+                <td>
+                    <a asp-action="Details" asp-controller="Moderator" asp-route-id="@item.Id_wycieczki">Szczegóły</a>
                 </td>
             </tr>
         }
