@@ -2,15 +2,15 @@
 @model Biuro_Podróży.Models.Wycieczka
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Szczegóły";
 }
 
-<h2>Details</h2>
+<h2>Szczegóły wycieczki</h2>
 
 <div>
-    <h4>Wycieczka</h4>
     <hr />
     <form asp-action="Create">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <dl class="dl-horizontal">
             <dt>
                 @Html.DisplayNameFor(model => model.Miejsce)
@@ -19,13 +19,13 @@
                 @Html.DisplayFor(model => model.Miejsce)
             </dd>
             <dt>
-                @Html.DisplayNameFor(model => model.Data_start)
+                Start
             </dt>
             <dd>
                 @Html.DisplayFor(model => model.Data_start)
             </dd>
             <dt>
-                @Html.DisplayNameFor(model => model.Data_end)
+                Koniec
             </dt>
             <dd>
                 @Html.DisplayFor(model => model.Data_end)
@@ -55,14 +55,10 @@
                 @Html.DisplayFor(model => model.Zakwaterowanie.Nazwa)
             </dd>
         </dl>
-        <div class="form-group">
-            <label asp-for="Opis" class="control-label"></label>
-            <input asp-for="Opis" class="form-control" />
-            <span asp-validation-for="Opis" class="text-danger"></span>
-        </div>
     </form>
 </div>
+
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Id_wycieczki">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Create" asp-route-id="@Model.Id_wycieczki">Zamów</a> |
+    <a asp-action="Index">Powrót</a>
 </div>

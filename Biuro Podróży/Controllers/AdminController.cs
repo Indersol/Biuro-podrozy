@@ -24,7 +24,8 @@ namespace Biuro_Podróży.Controllers
         {
             if (HttpContext.Session.GetString("Tryb") == "Admin")
             {
-                return View(await _context.User.ToListAsync());
+                var biuroContext = _context.User.Where(w => w.Uprawnienia != Uprawnienia.Admin);
+                return View(await biuroContext.ToListAsync());
             }
             return RedirectToAction("Index", "Home", new { area = "" });
         }
@@ -70,6 +71,7 @@ namespace Biuro_Podróży.Controllers
         {
             if (ModelState.IsValid)
             {
+                user.Uprawnienia = Uprawnienia.Moderator;
                 _context.Add(user);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

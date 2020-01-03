@@ -25,16 +25,18 @@
                 <li class="nav-item"><a asp-area="" asp-controller="Home" asp-action="Index">Strona główna</a></li>
                 @if (@Context.Session.GetInt32("Login") == 1 && @Context.Session.GetString("Tryb") == "Klient")
                 {
-                    <li class="nav-item"><a asp-area="" asp-controller="User" asp-action="index">Panel użytkownika</a></li>
+                    <li class="nav-item"><a asp-area="" asp-controller="User" asp-action="index">Rezerwacje</a></li>
                 }
                 @if (@Context.Session.GetString("Tryb") == "Admin")
                 {
                     <li class="nav-item"><a asp-area="" asp-controller="Moderator" asp-action="index">Zarządzaj wycieczkami</a></li>
                     <li class="nav-item"><a asp-area="" asp-controller="Admin" asp-action="index">Zarządzaj użytkownikami</a></li>
+                    <li class="nav-item"><a asp-area="" asp-controller="Wycieczki" asp-action="index">Zarządzaj rezerwacjami</a></li>
                 }
                 @if (@Context.Session.GetString("Tryb") == "Moderator")
                 {
                     <li class="nav-item"><a asp-area="" asp-controller="Moderator" asp-action="index">Zarządzaj wycieczkami</a></li>
+                    <li class="nav-item"><a asp-area="" asp-controller="Wycieczki" asp-action="index">Zarządzaj rezerwacjami</a></li>
                 }
                 <li class="nav-item"><a asp-area="" asp-controller="Home" asp-action="Privacy">Polityka prywatności</a></li>
             </ul>

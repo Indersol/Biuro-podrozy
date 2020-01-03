@@ -23,7 +23,7 @@ namespace Biuro_Podróży.Controllers
                 return RedirectToAction(nameof(Login));
             else
             {
-                var biuroContext = _context.Wycieczka.Include(w => w.Jedzenie).Include(w => w.Zakwaterowanie);
+                var biuroContext = _context.Wycieczka_Klient.Include(u => u.User).Include(w => w.Wycieczka).Where(w => w.User.Id_usera == HttpContext.Session.GetInt32("UID"));
                 return View(await biuroContext.ToListAsync());
             }
         }
@@ -38,12 +38,13 @@ namespace Biuro_Podróży.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Zarejestruj([Bind("Id_usera,Login,Password,ConfirmPassword,Email,Imie,Nazwisko,Miejscowosc,Telefon,2")] User user)
+        public async Task<IActionResult> Zarejestruj([Bind("Id_usera,Login,Password,ConfirmPassword,Email,Imie,Nazwisko,Miejscowosc,Telefon,Uprawnienia")] User user)
         {
             if (HttpContext.Session.GetInt32("Login") != 1)
             {
                 if (ModelState.IsValid)
                 {
+                    user.Uprawnienia = Uprawnienia.Klient;
                     _context.Add(user);
                     try
                     {

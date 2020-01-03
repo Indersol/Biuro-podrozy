@@ -1,32 +1,34 @@
-﻿@using Microsoft.AspNetCore.Http;
-@model IEnumerable<Biuro_Podróży.Models.Wycieczka>
+﻿@model IEnumerable<Biuro_Podróży.Models.Wycieczka_Klient>
+
 @{
-    ViewData["Title"] = "Panel użytkownika";
+    ViewData["Title"] = "Rezerwacje";
 }
-<h2>Panel użytkownika @Context.Session.GetString("ULogin")</h2>
+
+<h2>Moje rezerwacje</h2>
+
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Miejsce)
+                @Html.DisplayNameFor(model => model.Wycieczka)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Data_start)
+                Opis
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Data_end)
+                Cena biletu
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Cena)
+                @Html.DisplayNameFor(model => model.Bilety)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Opis)
+                Koszt podróży
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Jedzenie)
+                Początek
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Zakwaterowanie)
+                Koniec
             </th>
             <th></th>
         </tr>
@@ -35,29 +37,30 @@
         @foreach (var item in Model)
         {
         <tr>
+
             <td>
-                @Html.DisplayFor(modelItem => item.Miejsce)
+                @Html.DisplayFor(modelItem => item.Wycieczka.Miejsce)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Data_start)
+                @Html.DisplayFor(modelItem => item.Wycieczka.Opis)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Data_end)
+                @Html.DisplayFor(modelItem => item.Wycieczka.Cena)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Cena)
+                @Html.DisplayFor(modelItem => item.Bilety)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Opis)
+                @{
+                    var koszt = item.Bilety * item.Wycieczka.Cena;
+                }
+                @koszt
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Jedzenie.Nazwa)
+                @Html.DisplayFor(modelItem => item.Wycieczka.Data_start)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Zakwaterowanie.Nazwa)
-            </td>
-            <td>
-                <a asp-action="Details" asp-controller="Moderator" asp-route-id="@item.Id_wycieczki">Szczegóły</a>
+                @Html.DisplayFor(modelItem => item.Wycieczka.Data_end)
             </td>
         </tr>
         }

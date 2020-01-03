@@ -1,13 +1,12 @@
 ﻿@model Biuro_Podróży.Models.Wycieczka
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Szczegóły";
 }
 
-<h2>Details</h2>
+<h2>Szczegóły</h2>
 
 <div>
-    <h4>Wycieczka</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -17,13 +16,13 @@
             @Html.DisplayFor(model => model.Miejsce)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Data_start)
+            Początek
         </dt>
         <dd>
             @Html.DisplayFor(model => model.Data_start)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Data_end)
+            Koniec
         </dt>
         <dd>
             @Html.DisplayFor(model => model.Data_end)
@@ -55,6 +54,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Id_wycieczki">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model.Id_wycieczki">Edycja</a> |
+    <a asp-action="Index">Powrót</a>
 </div>

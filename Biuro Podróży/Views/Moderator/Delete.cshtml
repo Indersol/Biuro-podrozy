@@ -4,11 +4,10 @@
     ViewData["Title"] = "Delete";
 }
 
-<h2>Delete</h2>
+<h2>Usuń</h2>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>Czy na pewno czesz usunąć ten wpis?</h3>
 <div>
-    <h4>Wycieczka</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -18,13 +17,13 @@
             @Html.DisplayFor(model => model.Miejsce)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Data_start)
+            Początek
         </dt>
         <dd>
             @Html.DisplayFor(model => model.Data_start)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Data_end)
+            Koniec
         </dt>
         <dd>
             @Html.DisplayFor(model => model.Data_end)
@@ -58,6 +57,6 @@
     <form asp-action="Delete">
         <input type="hidden" asp-for="Id_wycieczki" />
         <input type="submit" value="Delete" class="btn btn-default" /> |
-        <a asp-action="Index">Back to List</a>
+        <a asp-action="Index">Powrót</a>
     </form>
 </div>

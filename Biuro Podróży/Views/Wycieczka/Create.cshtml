@@ -1,0 +1,32 @@
+﻿@model Biuro_Podróży.Models.Wycieczka_Klient
+
+
+@{
+    ViewData["Title"] = "Zamów wycieczkę";
+}
+
+<h4>Zamów bilety</h4>
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        @ViewBag.Id_wycieczki.
+
+
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Bilety" class="control-label"></label>
+                <input asp-for="Bilety" class="form-control" />
+                <span asp-validation-for="Bilety" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Powrót</a>
+</div>

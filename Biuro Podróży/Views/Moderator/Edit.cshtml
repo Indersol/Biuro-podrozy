@@ -1,12 +1,11 @@
 ﻿@model Biuro_Podróży.Models.Wycieczka
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Edycja";
 }
 
-<h2>Edit</h2>
+<h2>Edycja wycieczki</h2>
 
-<h4>Wycieczka</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -19,12 +18,12 @@
                 <span asp-validation-for="Miejsce" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Data_start" class="control-label"></label>
+                <label asp-for="Data_start" class="control-label">Początek</label>
                 <input asp-for="Data_start" class="form-control" />
                 <span asp-validation-for="Data_start" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Data_end" class="control-label"></label>
+                <label asp-for="Data_end" class="control-label">Koniec</label>
                 <input asp-for="Data_end" class="form-control" />
                 <span asp-validation-for="Data_end" class="text-danger"></span>
             </div>
@@ -39,24 +38,24 @@
                 <span asp-validation-for="Opis" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Id_jedzenia" class="control-label"></label>
+                <label asp-for="Id_jedzenia" class="control-label">Jedzenie</label>
                 <select asp-for="Id_jedzenia" class="form-control" asp-items="ViewBag.Id_jedzenia"></select>
                 <span asp-validation-for="Id_jedzenia" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Id_zakwaterowania" class="control-label"></label>
+                <label asp-for="Id_zakwaterowania" class="control-label">Zakwaterowanie</label>
                 <select asp-for="Id_zakwaterowania" class="form-control" asp-items="ViewBag.Id_zakwaterowania"></select>
                 <span asp-validation-for="Id_zakwaterowania" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Zapisz" class="btn btn-default" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Powrót</a>
 </div>
 
 @section Scripts {

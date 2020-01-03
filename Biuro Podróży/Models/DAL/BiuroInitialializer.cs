@@ -36,10 +36,10 @@ namespace Biuro_Podróży.Models
 
             var posilki = new Jedzenie[]
             {
-                new Jedzenie {Nazwa = "Brak",Cena = 0, Opis="Brak posiłków" },
-                new Jedzenie {Nazwa = "Tylko śniadanie",Cena = 10, Opis="Same śniadania" },
-                new Jedzenie {Nazwa = "Tylko obiad",Cena = 15, Opis="Same obiady" },
-                new Jedzenie {Nazwa = "Śniadanie + obiad",Cena = 25, Opis="Śniadanie oraz obiad" }
+                new Jedzenie {Nazwa = "Brak"},
+                new Jedzenie {Nazwa = "Tylko śniadanie"},
+                new Jedzenie {Nazwa = "Tylko obiad"},
+                new Jedzenie {Nazwa = "Śniadanie + obiad"}
             };
             foreach (Jedzenie p in posilki)
             {
@@ -49,12 +49,12 @@ namespace Biuro_Podróży.Models
 
             var hotele = new Zakwaterowanie[]
             {
-                new Zakwaterowanie {Nazwa = "Brak", Cena = 0, Opis = "Brak zakwaterowania" },
-                new Zakwaterowanie {Nazwa = "Hotel 1 gwiazdka", Cena = 100, Opis = "Tani hotel" },
-                new Zakwaterowanie {Nazwa = "Hotel 2 gwiazdki", Cena = 200, Opis = "Średni hotel" },
-                new Zakwaterowanie {Nazwa = "Hotel 3 gwiazdki", Cena = 400, Opis = "Średni hotel" },
-                new Zakwaterowanie {Nazwa = "Hotel 4 gwiazdki", Cena = 700, Opis = "Drogi hotel" },
-                new Zakwaterowanie {Nazwa = "Hotel 5 gwiazdek", Cena = 1000, Opis = "Full wypas" },
+                new Zakwaterowanie {Nazwa = "Brak"},
+                new Zakwaterowanie {Nazwa = "Hotel 1 gwiazdka"},
+                new Zakwaterowanie {Nazwa = "Hotel 2 gwiazdki"},
+                new Zakwaterowanie {Nazwa = "Hotel 3 gwiazdki"},
+                new Zakwaterowanie {Nazwa = "Hotel 4 gwiazdki"},
+                new Zakwaterowanie {Nazwa = "Hotel 5 gwiazdek"},
             };
             foreach (Zakwaterowanie z in hotele)
             {

@@ -1,13 +1,13 @@
 ﻿@model Biuro_Podróży.Models.User
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Szczegóły";
 }
 
-<h2>Details</h2>
+<h2>Szczegóły</h2>
 
 <div>
-    <h4>User</h4>
+    <h4>Dane użytkownika</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -61,6 +61,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Id_usera">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model.Id_usera">Edycja</a> |
+    <a asp-action="Index">Powrót</a>
 </div>

@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<Biuro_Podróży.Models.Wycieczka>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Wycieczki";
 }
 
-<h2>Index</h2>
+<h2>Lista wycieczek</h2>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Dodaj wyczieczkę</a>
 </p>
 <table class="table">
     <thead>
@@ -16,10 +16,10 @@
                 @Html.DisplayNameFor(model => model.Miejsce)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Data_start)
+                Początek
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Data_end)
+                Koniec
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Cena)
@@ -61,9 +61,9 @@
                 @Html.DisplayFor(modelItem => item.Zakwaterowanie.Nazwa)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id_wycieczki">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id_wycieczki">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id_wycieczki">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.Id_wycieczki">Edycja</a> |
+                <a asp-action="Details" asp-route-id="@item.Id_wycieczki">Szczegóły</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id_wycieczki">Usuń</a>
             </td>
         </tr>
 }
