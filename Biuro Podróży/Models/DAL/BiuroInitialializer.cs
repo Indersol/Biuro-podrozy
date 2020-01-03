@@ -7,6 +7,7 @@ namespace Biuro_Podróży.Models
 {
     public static class BiuroInitialializer
     {
+        //nie działa. Trzeba uzupełniać bazę ręcznie po uruchomieniu aplikacji na nowym komputerze. Nie kasuję bo może coś jeszcze wymyślimy.
         public static void Initialize(BiuroContext context)
         {
             if(context.User.Any())

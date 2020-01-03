@@ -1,0 +1,60 @@
+﻿@model Biuro_Podróży.Models.Wycieczka
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Wycieczka</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Miejsce)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Miejsce)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Data_start)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Data_start)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Data_end)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Data_end)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Cena)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Cena)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Opis)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Opis)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Jedzenie)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Jedzenie.Nazwa)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Zakwaterowanie)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Zakwaterowanie.Nazwa)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id_wycieczki">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

@@ -1,0 +1,66 @@
+﻿@using Microsoft.AspNetCore.Http;
+@model IEnumerable<Biuro_Podróży.Models.Wycieczka>
+@{
+    ViewData["Title"] = "Panel użytkownika";
+}
+<h2>Panel użytkownika @Context.Session.GetString("UserEmail")</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Miejsce)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Data_start)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Data_end)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cena)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Opis)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Jedzenie)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Zakwaterowanie)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Miejsce)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Data_start)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Data_end)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cena)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Opis)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Jedzenie.Nazwa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Zakwaterowanie.Nazwa)
+            </td>
+            <td>
+                <a asp-action="Details" asp-route-id="@item.Id_wycieczki">Szczegóły</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

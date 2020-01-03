@@ -53,7 +53,7 @@ namespace Biuro_Podróży.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id_usera,Login,Password,Email,Imie,Nazwisko,Miejscowosc,Telefon,Uprawnienia")] User user)
+        public async Task<IActionResult> Create([Bind("Id_usera,Login,Password,ConfirmPassword,Email,Imie,Nazwisko,Miejscowosc,Telefon,2")] User user)
         {
             if (ModelState.IsValid)
             {
@@ -85,7 +85,7 @@ namespace Biuro_Podróży.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id_usera,Login,Password,Email,Imie,Nazwisko,Miejscowosc,Telefon,Uprawnienia")] User user)
+        public async Task<IActionResult> Edit(int id, [Bind("Id_usera,Login,Password,ConfirmPassword,Email,Imie,Nazwisko,Miejscowosc,Telefon,2")] User user)
         {
             if (id != user.Id_usera)
             {
