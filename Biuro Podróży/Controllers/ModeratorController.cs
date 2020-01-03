@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Biuro_Podróży.Models;
+using Biuro_Podróży.Controllers;
+using Microsoft.AspNetCore.Http;
 
 namespace Biuro_Podróży.Controllers
 {
@@ -21,36 +23,49 @@ namespace Biuro_Podróży.Controllers
         // GET: Moderator
         public async Task<IActionResult> Index()
         {
-            var biuroContext = _context.Wycieczka.Include(w => w.Jedzenie).Include(w => w.Zakwaterowanie);
-            return View(await biuroContext.ToListAsync());
+            if (HttpContext.Session.GetString("Tryb") == "Moderator" || HttpContext.Session.GetString("Tryb") == "Admin")
+            {
+                var biuroContext = _context.Wycieczka.Include(w => w.Jedzenie).Include(w => w.Zakwaterowanie);
+                return View(await biuroContext.ToListAsync());
+            }
+            return RedirectToAction("Index", "Home", new { area = "" });
         }
 
         // GET: Moderator/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
+            if (HttpContext.Session.GetString("Tryb") == "Moderator" || HttpContext.Session.GetString("Tryb") == "Admin")
             {
-                return NotFound();
-            }
+                if (id == null)
+                {
+                    return NotFound();
+                }
 
-            var wycieczka = await _context.Wycieczka
-                .Include(w => w.Jedzenie)
-                .Include(w => w.Zakwaterowanie)
-                .FirstOrDefaultAsync(m => m.Id_wycieczki == id);
-            if (wycieczka == null)
-            {
-                return NotFound();
-            }
+                var wycieczka = await _context.Wycieczka
+                    .Include(w => w.Jedzenie)
+                    .Include(w => w.Zakwaterowanie)
+                    .FirstOrDefaultAsync(m => m.Id_wycieczki == id);
+                if (wycieczka == null)
+                {
+                    return NotFound();
+                }
 
-            return View(wycieczka);
+                return View(wycieczka);
+            }
+            return RedirectToAction("Index", "Home", new { area = "" });
         }
 
         // GET: Moderator/Create
         public IActionResult Create()
         {
-            ViewData["Id_jedzenia"] = new SelectList(_context.Jedzenie, "Id_jedzenia", "Nazwa");
-            ViewData["Id_zakwaterowania"] = new SelectList(_context.Zakwaterowanie, "Id_zakwaterowania", "Nazwa");
-            return View();
+            if (HttpContext.Session.GetString("Tryb") == "Moderator" || HttpContext.Session.GetString("Tryb") == "Admin")
+            {
+                ViewData["Id_jedzenia"] = new SelectList(_context.Jedzenie, "Id_jedzenia", "Nazwa");
+                ViewData["Id_zakwaterowania"] = new SelectList(_context.Zakwaterowanie, "Id_zakwaterowania", "Nazwa");
+                return View();
+            }
+            return RedirectToAction("Index", "Home", new { area = "" });
+
         }
 
         // POST: Moderator/Create
@@ -74,19 +89,23 @@ namespace Biuro_Podróży.Controllers
         // GET: Moderator/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
+            if (HttpContext.Session.GetString("Tryb") == "Moderator" || HttpContext.Session.GetString("Tryb") == "Admin")
             {
-                return NotFound();
-            }
+                if (id == null)
+                {
+                    return NotFound();
+                }
 
-            var wycieczka = await _context.Wycieczka.FindAsync(id);
-            if (wycieczka == null)
-            {
-                return NotFound();
+                var wycieczka = await _context.Wycieczka.FindAsync(id);
+                if (wycieczka == null)
+                {
+                    return NotFound();
+                }
+                ViewData["Id_jedzenia"] = new SelectList(_context.Jedzenie, "Id_jedzenia", "Nazwa", wycieczka.Id_jedzenia);
+                ViewData["Id_zakwaterowania"] = new SelectList(_context.Zakwaterowanie, "Id_zakwaterowania", "Nazwa", wycieczka.Id_zakwaterowania);
+                return View(wycieczka);
             }
-            ViewData["Id_jedzenia"] = new SelectList(_context.Jedzenie, "Id_jedzenia", "Nazwa", wycieczka.Id_jedzenia);
-            ViewData["Id_zakwaterowania"] = new SelectList(_context.Zakwaterowanie, "Id_zakwaterowania", "Nazwa", wycieczka.Id_zakwaterowania);
-            return View(wycieczka);
+            return RedirectToAction("Index", "Home", new { area = "" });
         }
 
         // POST: Moderator/Edit/5
@@ -129,21 +148,25 @@ namespace Biuro_Podróży.Controllers
         // GET: Moderator/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
+            if (HttpContext.Session.GetString("Tryb") == "Moderator" || HttpContext.Session.GetString("Tryb") == "Admin")
             {
-                return NotFound();
-            }
+                if (id == null)
+                {
+                    return NotFound();
+                }
 
-            var wycieczka = await _context.Wycieczka
-                .Include(w => w.Jedzenie)
-                .Include(w => w.Zakwaterowanie)
-                .FirstOrDefaultAsync(m => m.Id_wycieczki == id);
-            if (wycieczka == null)
-            {
-                return NotFound();
-            }
+                var wycieczka = await _context.Wycieczka
+                    .Include(w => w.Jedzenie)
+                    .Include(w => w.Zakwaterowanie)
+                    .FirstOrDefaultAsync(m => m.Id_wycieczki == id);
+                if (wycieczka == null)
+                {
+                    return NotFound();
+                }
 
-            return View(wycieczka);
+                return View(wycieczka);
+            }
+            return RedirectToAction("Index", "Home", new { area = "" });
         }
 
         // POST: Moderator/Delete/5
