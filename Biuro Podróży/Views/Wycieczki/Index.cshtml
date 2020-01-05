@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Biuro_Podróży.Models.Wycieczka_Klient>
+
+@{
+    ViewData["Title"] = "Rezerwacje";
+}
+
+<h2>Lista rezerwacji</h2>
+
+<p>
+    <a asp-action="Create">Dodaj rezerwację</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Bilety)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User)
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Wycieczka)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Bilety)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.Login)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Wycieczka.Miejsce)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id_zamowienia">Edycja</a> |
+                <a asp-action="Details" asp-route-id="@item.Id_zamowienia">Szczegóły</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id_zamowienia">Usuń</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
