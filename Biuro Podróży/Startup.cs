@@ -17,17 +17,14 @@ namespace Biuro_Podróży
 {
     public class Startup
     {
+        private IConfiguration _config; 
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            _config = configuration;
         }
-
-        public IConfiguration Configuration { get; }
-
         public void ConfigureServices(IServiceCollection services)
         {
             var connection = @"Server=(localdb)\mssqllocaldb;Database=Biuro;Trusted_Connection=True;ConnectRetryCount=0";
-
 
             services.Configure<CookiePolicyOptions>(options =>
             {
@@ -35,7 +32,12 @@ namespace Biuro_Podróży
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-
+            services.Configure<IdentityOptions>(options => 
+            {
+                options.Password.RequiredLength = 5;
+                options.Password.RequiredUniqueChars = 0;
+                options.Password.RequireNonAlphanumeric = false;
+            });
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddDbContextPool<BiuroContext>(options => options.UseSqlServer(connection));
             services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<BiuroContext>();
