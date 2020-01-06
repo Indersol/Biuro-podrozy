@@ -49,7 +49,7 @@ namespace Biuro_Podróży
             }).SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddDbContextPool<BiuroContext>(options => options.UseSqlServer(connection));
-            services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<BiuroContext>();
+            services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<BiuroContext>();
 
             services.AddSession(s => s.IdleTimeout = TimeSpan.FromMinutes(30));
             services.AddHttpContextAccessor();
@@ -64,8 +64,9 @@ namespace Biuro_Podróży
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
-                app.UseHsts();
+                app.UseStatusCodePagesWithReExecute("/Error/{0}");
+                //app.UseExceptionHandler("/Home/Error");
+                //app.UseHsts();
             }
 
             app.UseHttpsRedirection();

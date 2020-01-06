@@ -4,14 +4,16 @@ using Biuro_Podróży.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BiuroPodróży.Migrations
 {
     [DbContext(typeof(BiuroContext))]
-    partial class BiuroContextModelSnapshot : ModelSnapshot
+    [Migration("20200106022326_ExtendIdentityUser")]
+    partial class ExtendIdentityUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -133,13 +135,9 @@ namespace BiuroPodróży.Migrations
 
                     b.Property<int>("Bilety");
 
-                    b.Property<string>("Id");
-
                     b.Property<int>("Id_wycieczki");
 
                     b.HasKey("Id_zamowienia");
-
-                    b.HasIndex("Id");
 
                     b.HasIndex("Id_wycieczki");
 
@@ -286,10 +284,6 @@ namespace BiuroPodróży.Migrations
 
             modelBuilder.Entity("Biuro_Podróży.Models.Wycieczka_Klient", b =>
                 {
-                    b.HasOne("Biuro_Podróży.Models.ApplicationUser", "ApplicationUser")
-                        .WithMany()
-                        .HasForeignKey("Id");
-
                     b.HasOne("Biuro_Podróży.Models.Wycieczka", "Wycieczka")
                         .WithMany()
                         .HasForeignKey("Id_wycieczki")

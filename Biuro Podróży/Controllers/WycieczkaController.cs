@@ -15,7 +15,6 @@ using System.IO;
 
 namespace Biuro_Podróży.Controllers
 {
-    [AllowAnonymous]
     public class WycieczkaController : Controller
     {
         private readonly BiuroContext _context;
@@ -26,13 +25,13 @@ namespace Biuro_Podróży.Controllers
             _context = context;
             _hostEnv = host;
         }
-
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             var biuroContext = _context.Wycieczka.Include(w => w.Jedzenie).Include(w => w.Zakwaterowanie);
             return View(await biuroContext.ToListAsync());
         }
-
+        [AllowAnonymous]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -51,7 +50,7 @@ namespace Biuro_Podróży.Controllers
 
             return View(wycieczka);
         }
-
+        [Authorize]
         public IActionResult Create()
         {
             ViewData["Id_jedzenia"] = new SelectList(_context.Jedzenie, "Id_jedzenia", "Nazwa");
@@ -61,6 +60,7 @@ namespace Biuro_Podróży.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Create([Bind("Id_wycieczki,Miejsce,Data_start,Data_end,Cena,Opis,Id_jedzenia,Id_zakwaterowania")] Wycieczka wycieczka, IFormFile Image)
         {
             string filename = Path.GetFileName(Image.FileName);
@@ -90,7 +90,7 @@ namespace Biuro_Podróży.Controllers
             ViewData["Id_zakwaterowania"] = new SelectList(_context.Zakwaterowanie, "Id_zakwaterowania", "Nazwa", wycieczka.Id_zakwaterowania);
             return View(wycieczka);
         }
-
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -110,6 +110,7 @@ namespace Biuro_Podróży.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Edit(int id, [Bind("Id_wycieczki,Miejsce,Data_start,Data_end,Cena,Opis,Id_jedzenia,Id_zakwaterowania")] Wycieczka wycieczka, IFormFile Image)
         {
             if (id != wycieczka.Id_wycieczki)
@@ -159,7 +160,7 @@ namespace Biuro_Podróży.Controllers
             ViewData["Id_zakwaterowania"] = new SelectList(_context.Zakwaterowanie, "Id_zakwaterowania", "Nazwa", wycieczka.Id_zakwaterowania);
             return View(wycieczka);
         }
-
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -178,7 +179,7 @@ namespace Biuro_Podróży.Controllers
 
             return View(wycieczka);
         }
-
+        [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

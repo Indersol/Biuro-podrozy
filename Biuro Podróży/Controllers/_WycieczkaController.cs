@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Biuro_Podróży.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -52,9 +53,6 @@ namespace Biuro_Podróży.Controllers
             return View();
         }
 
-        // POST: Wycieczki/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(int id,[Bind("Id_zamowienia,Id_usera,Id_wycieczki,Bilety")] Wycieczka_Klient wycieczka_Klient)
@@ -62,6 +60,10 @@ namespace Biuro_Podróży.Controllers
 
             if (ModelState.IsValid)
             {
+                //wyciąganie id z IdentityUser czy raczej ApplicationUser po zmianie
+                ClaimsPrincipal currentUser = this.User;
+                wycieczka_Klient.Id = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
+                
                 wycieczka_Klient.Id_wycieczki = id;
                 _context.Add(wycieczka_Klient);
                 await _context.SaveChangesAsync();

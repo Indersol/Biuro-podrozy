@@ -17,7 +17,10 @@ namespace Biuro_Podróży.Models
 
         [Required(ErrorMessage = "Ustawienie ilości biletów jest wymagane!")]
         public int Bilety { get; set; }
+        [ForeignKey("ApplicationUser")]
+        public string Id { get; set; }
 //to jeszcze do poprawy 
+        public virtual ApplicationUser ApplicationUser { get; set; }
         public virtual Wycieczka Wycieczka { get; set; }
 
     }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Biuro_Podróży.Models
 {
-    public class BiuroContext:IdentityDbContext
+    public class BiuroContext:IdentityDbContext<ApplicationUser>
 {
         public BiuroContext(DbContextOptions<BiuroContext> options) :base(options)
         { }
