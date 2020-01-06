@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Biuro_Podróży.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Biuro_Podróży.Controllers
 {
+    [AllowAnonymous]
     public class HomeController : Controller
     {
         private readonly BiuroContext _context;
@@ -22,8 +24,6 @@ namespace Biuro_Podróży.Controllers
             return View(await biuroContext.ToListAsync());
             //return View();
         }
-
-
         public IActionResult Privacy()
         {
             ViewData["Message"] = "Polityka prywatnośći";

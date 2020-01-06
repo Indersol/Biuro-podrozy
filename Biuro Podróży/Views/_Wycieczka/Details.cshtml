@@ -1,0 +1,31 @@
+﻿@using Microsoft.AspNetCore.Http;
+@model Biuro_Podróży.Models.Wycieczka
+@{
+    ViewData["Title"] = "Szczegóły";
+}
+<h2>Szczegóły wycieczki</h2>
+
+<div class="row justify-content-center m-3">
+    <div class="col-sm-8">
+        <div class="card">
+            <div class="card-header">
+                <h1></h1>
+            </div>
+            <div class="card-body text-center">
+                <img class="card-img-top" src="~/images/brak.jpg"/>
+                <h4>Miejsce: @Model.Miejsce</h4>
+                <h4>Początek: @Model.Data_start Koniec: @Model.Data_end</h4>
+                <h4>Opis: @Model.Opis</h4>
+            </div>
+            <div class="card-footer text-center">
+                <a asp-action="Details" asp-controller="Wycieczka" asp-route-id="@Model.Id_wycieczki" class="btn btn-primary">Szczegóły</a>
+                <a asp-action="Edit" asp-controller="Wycieczka" asp-route-id="@Model.Id_wycieczki" class="btn btn-primary">Edycja</a>
+                <a asp-action="Delete" asp-controller="Wycieczka" asp-route-id="@Model.Id_wycieczki" class="btn btn-primary">Usuń</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Powrót</a>
+</div>

@@ -12,7 +12,6 @@ namespace Biuro_Podróży.Models
         public BiuroContext(DbContextOptions<BiuroContext> options) :base(options)
         { }
 
-        public DbSet<User> User { get; set; }
         public DbSet<Jedzenie> Jedzenie { get; set; }
         public DbSet<Zakwaterowanie> Zakwaterowanie { get; set; }
         public DbSet<Wycieczka> Wycieczka { get; set; }

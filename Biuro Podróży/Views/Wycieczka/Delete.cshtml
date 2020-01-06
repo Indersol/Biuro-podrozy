@@ -1,0 +1,62 @@
+﻿@model Biuro_Podróży.Models.Wycieczka
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Usuń</h2>
+
+<h3>Czy na pewno czesz usunąć ten wpis?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Miejsce)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Miejsce)
+        </dd>
+        <dt>
+            Początek
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Data_start)
+        </dd>
+        <dt>
+            Koniec
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Data_end)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Cena)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Cena)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Opis)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Opis)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Jedzenie)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Jedzenie.Nazwa)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Zakwaterowanie)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Zakwaterowanie.Nazwa)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id_wycieczki" />
+        <input type="submit" value="Usuń" class="btn btn-warning" />
+        <a asp-action="Index" class="btn btn-danger">Cofnij</a>
+    </form>
+</div>

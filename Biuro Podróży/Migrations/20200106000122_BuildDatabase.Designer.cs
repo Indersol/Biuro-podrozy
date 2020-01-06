@@ -4,14 +4,16 @@ using Biuro_Podróży.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BiuroPodróży.Migrations
 {
     [DbContext(typeof(BiuroContext))]
-    partial class BiuroContextModelSnapshot : ModelSnapshot
+    [Migration("20200106000122_BuildDatabase")]
+    partial class BuildDatabase
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

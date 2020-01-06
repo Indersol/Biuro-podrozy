@@ -1,64 +1,28 @@
 ﻿@using Microsoft.AspNetCore.Http;
 @model Biuro_Podróży.Models.Wycieczka
-
 @{
     ViewData["Title"] = "Szczegóły";
 }
-
 <h2>Szczegóły wycieczki</h2>
 
 <div>
+    <img class="card-img-top" style="width:200px" src="data:image/jpg;base64,@Convert.ToBase64String(Model.Image)" />
     <hr />
-    <form asp-action="Create">
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.Miejsce)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.Miejsce)
-            </dd>
-            <dt>
-                Start
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.Data_start)
-            </dd>
-            <dt>
-                Koniec
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.Data_end)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.Cena)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.Cena)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.Opis)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.Opis)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.Jedzenie)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.Jedzenie.Nazwa)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.Zakwaterowanie)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.Zakwaterowanie.Nazwa)
-            </dd>
-        </dl>
-    </form>
+    <dl class="dl-horizontal">
+        <dt>Miejsce</dt>
+        <dd>@Model.Miejsce</dd>
+        <dt>Początek - Koniec</dt>
+        <dd>@Model.Data_start - @Model.Data_end</dd>
+        <dt>Jedzenie</dt>
+        <dd>@Model.Jedzenie</dd>
+        <dt>Zakwaterowanie</dt>
+        <dd>@Model.Zakwaterowanie</dd>
+        <dt>Opis</dt>
+        <dd>@Model.Opis</dd>
+    </dl>
 </div>
-
-<div>
-    <a asp-action="Create" asp-route-id="@Model.Id_wycieczki">Zamów</a> |
-    <a asp-action="Index">Powrót</a>
+<div class="row">
+    <a asp-action="Edit" asp-controller="Wycieczka" asp-route-id="@Model.Id_wycieczki" class="btn btn-primary">Edycja</a>
+    <a asp-action="Delete" asp-controller="Wycieczka" asp-route-id="@Model.Id_wycieczki" class="btn btn-warning">Usuń</a>
+    <a asp-action="Index" class="btn btn-danger">Cofnij</a>
 </div>

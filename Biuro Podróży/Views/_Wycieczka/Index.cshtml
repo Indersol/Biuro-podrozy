@@ -1,0 +1,23 @@
+﻿@using Microsoft.AspNetCore.Http;
+@model IEnumerable<Biuro_Podróży.Models.Wycieczka>
+@{
+    ViewData["Title"] = "Strona Główna";
+}
+<h2>Strona Główna</h2>
+
+<div class="card-deck">
+    @foreach (var wycieczka in Model)
+    {
+        <div class="card-deck m-3">
+            <div class="card-header">
+                <h3>@wycieczka.Miejsce</h3>
+            </div>
+            <img class="card-img-top" src="~/images/brak.jpg" />
+            <div class="card-footer text-center">
+                <a asp-action="Details" asp-controller="Wycieczka" asp-route-id="@wycieczka.Id_wycieczki" class="btn btn-primary">Szczegóły</a>
+                <a asp-action="Edit" asp-controller="Wycieczka" asp-route-id="@wycieczka.Id_wycieczki" class="btn btn-primary">Edycja</a>
+                <a asp-action="Delete" asp-controller="Wycieczka" asp-route-id="@wycieczka.Id_wycieczki" class="btn btn-primary">Usuń</a>
+            </div>
+        </div>
+    }
+</div>

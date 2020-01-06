@@ -1,14 +1,16 @@
 ﻿@model Biuro_Podróży.Models.Wycieczka
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Edycja";
 }
 
-<h2>Utwórz wycieczkę</h2>
+<h2>Edycja wycieczki</h2>
+
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form enctype="multipart/form-data" asp-action="Create">
+        <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id_wycieczki" />
             <div class="form-group">
                 <label asp-for="Miejsce" class="control-label"></label>
                 <input asp-for="Miejsce" class="form-control" />
@@ -37,12 +39,14 @@
             <div class="form-group">
                 <label asp-for="Id_jedzenia" class="control-label">Jedzenie</label>
                 <select asp-for="Id_jedzenia" class="form-control" asp-items="ViewBag.Id_jedzenia"></select>
+                <span asp-validation-for="Id_jedzenia" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Id_zakwaterowania" class="control-label">Zakwaterowanie</label>
                 <select asp-for="Id_zakwaterowania" class="form-control" asp-items="ViewBag.Id_zakwaterowania"></select>
+                <span asp-validation-for="Id_zakwaterowania" class="text-danger"></span>
             </div>
-            <img class="img-responsive full-width" id="logoImage" src="~/images/img.jpg" alt="Podgląd"
+            <img class="card-img-top" src="data:image/jpg;base64,@Convert.ToBase64String(Model.Image)" alt="Podgląd"
                  style="border:1px ;margin-top:20px;" />
             <div class="form-group">
                 <input type="file" id="Imageinput" asp-for="Image" class="form-control" name="Image"
@@ -50,7 +54,7 @@
                 <span asp-validation-for="Image" class="text-danger"></span>
             </div>
             <br />
-            <input type="submit" value="Create" class="btn btn-primary" />
+            <input type="submit" value="Edytuj" class="btn btn-primary" />
             <a asp-action="Index" class="btn btn-danger">Cofnij</a>
         </form>
     </div>
