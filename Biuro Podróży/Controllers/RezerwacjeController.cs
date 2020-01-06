@@ -19,6 +19,14 @@ namespace Biuro_Podróży.Controllers
             _context = context;
         }
 
+        public async Task<IActionResult> Moje()
+        {
+            ClaimsPrincipal currentUser = this.User;
+            var biuroContext = _context.Wycieczka_Klient.Include(u => u.ApplicationUser).Include(w => w.Wycieczka)
+                .Where(w => w.ApplicationUser.Id == currentUser.FindFirst(ClaimTypes.NameIdentifier).Value);
+            return View(await biuroContext.ToListAsync());
+        }
+
         [Authorize]
         public IActionResult Create(int? id)
         {

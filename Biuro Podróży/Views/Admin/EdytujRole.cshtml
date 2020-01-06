@@ -1,0 +1,39 @@
+﻿@model Biuro_Podróży.ViewModel.EditRoleViewModel
+@{
+    ViewData["Title"] = "EdytujRole";
+}
+
+<h2>Edytuj uprawnienia</h2>
+<hr />
+<div>
+    <form method="post">
+        <div class="form-group row">
+            <label asp-for="Id" class="control-label">Poziom uprawnień</label>
+            <input asp-for="Id" disabled class="form-control" />
+            <span asp-validation-for="Id" class="text-danger"></span>
+        </div>
+        <div class="form-group row">
+            <label asp-for="RoleName" class="control-label">Poziom uprawnień</label>
+            <input asp-for="RoleName" class="form-control" />
+            <span asp-validation-for="RoleName" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-primary">Zmień</button>
+        <a asp-controller="Admin" asp-action="WszystkieRole" class="btn btn-danger">Cofnij</a>
+    </form>
+</div>
+<h3>Użytkownicy</h3>
+<div>
+    @if (Model.Users.Any())
+    {
+        foreach (var user in Model.Users)
+        {
+            <h5 class="row">@User</h5>
+        }
+    }
+    else
+    {
+        <h3>Brak użytkowników</h3>
+    }
+
+</div>
+        

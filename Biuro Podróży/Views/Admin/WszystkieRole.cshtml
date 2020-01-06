@@ -1,0 +1,41 @@
+﻿@model IEnumerable<IdentityRole>
+@{
+    ViewData["Title"] = "Uprawnienia";
+}
+
+<h2>Uprawnienia</h2>
+
+<a asp-action="DodajRole" asp-controller="Admin" class="btn btn-info">Dodaj</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Id uprawnienia
+            </th>
+            <th>
+                Nazwa
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    <div class="card-footer text-center">
+                        <a asp-action="EdytujRole" asp-controller="Admin" asp-route-id="@item.Id" class="btn btn-primary">Edycja</a>
+                        <a asp-action="UsunRole" asp-controller="Admin" asp-route-id="@item.Id" class="btn btn-warning">Usuń</a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

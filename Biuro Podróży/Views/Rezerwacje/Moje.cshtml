@@ -1,0 +1,67 @@
+﻿@model IEnumerable<Biuro_Podróży.Models.Wycieczka_Klient>
+
+@{
+    ViewData["Title"] = "Rezerwacje";
+}
+
+<h2>Moje rezerwacje</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Wycieczka)
+            </th>
+            <th>
+                Opis
+            </th>
+            <th>
+                Cena biletu
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Bilety)
+            </th>
+            <th>
+                Koszt podróży
+            </th>
+            <th>
+                Początek
+            </th>
+            <th>
+                Koniec
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Wycieczka.Miejsce)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Wycieczka.Opis)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Wycieczka.Cena)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Bilety)
+                </td>
+                <td>
+                    @{
+                        var koszt = item.Bilety * item.Wycieczka.Cena;
+                    }
+                    @koszt
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Wycieczka.Data_start)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Wycieczka.Data_end)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
