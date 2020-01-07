@@ -19,7 +19,6 @@ namespace Biuro_Podróży.Models
         public int Bilety { get; set; }
         [ForeignKey("ApplicationUser")]
         public string Id { get; set; }
-//to jeszcze do poprawy 
         public virtual ApplicationUser ApplicationUser { get; set; }
         public virtual Wycieczka Wycieczka { get; set; }
 

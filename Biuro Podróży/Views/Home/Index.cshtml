@@ -3,7 +3,42 @@
 @{
     ViewData["Title"] = "Strona Główna";
 }
-<h2>Strona Główna</h2>
 
-<h1>Tutaj zmienić bo to strona główna</h1>
-<a asp-action="Index" asp-controller="Wycieczka" class="btn btn-primary">Wycieczki</a>
+
+<div class="jumbotron" style="width:100%;">
+    <h2>Zapoznaj się z naszą ofertą !!!</h2>
+    <h4>Przygotowaliśmy Tobie niesamowite kierunki podróży !!!<br />Zarezerwuj wycieczkę już teraz !!!</h4>
+</div>
+
+    @{
+        int i = 0;
+        @foreach (var wycieczka in Model)
+        {
+            @if (i < 4)
+            {
+                <div class="responsive">
+                    <div class="gallery">
+                        <a asp-action="Details" asp-controller="Wycieczka" asp-route-id="@wycieczka.Id_wycieczki">
+                            <div style="height:300px">
+                                <img src="data:image/jpg;base64,@Convert.ToBase64String(wycieczka.Image)" alt="Cinque Terre" style="height:100%; width:100%">
+                            </div>
+                        </a>
+                        <div class="desc">
+                            <span class="travel-direction-word">kierunek &rarr;</span>
+                            <span class="travel-direction-body">@wycieczka.Miejsce</span>
+                            <br />
+                            <span class="travel-direction-word">cena &rarr;</span>
+                            <span class="travel-direction-body">@wycieczka.Cena zł</span>
+                        </div>
+                    </div>
+                </div>
+            }
+            i++;
+        }
+    }
+    <div class="clearfix"></div>
+    <a asp-action="Index" asp-controller="Wycieczka" class="btn btn-primary" style="margin-top:2vw; margin-left: 80%;">Zobacz naszą ofertę &rarr;</a>
+@section Scripts
+{
+    <link href="~/css/index.css" rel="stylesheet" />
+}

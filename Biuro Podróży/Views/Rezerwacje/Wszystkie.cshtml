@@ -16,6 +16,9 @@
                 @Html.DisplayNameFor(model => model.Bilety)
             </th>
             <th>
+                Cena
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Wycieczka)
             </th>
             <th></th>
@@ -32,12 +35,17 @@
                 @Html.DisplayFor(modelItem => item.Bilety)
             </td>
             <td>
+                @{
+                    var koszt = item.Bilety * item.Wycieczka.Cena;
+                }
+                @koszt
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Wycieczka.Miejsce)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id_zamowienia" class="btn btn-primary">Edycja</a>
-                <a asp-action="Details" asp-route-id="@item.Id_zamowienia" class="btn btn-info">Szczegóły</a>
-                <a asp-action="Delete" asp-route-id="@item.Id_zamowienia" class="btn btn-warning">Usuń</a>
+                <a asp-action="Edit" asp-route-idz="@item.Id_zamowienia" class="btn btn-primary">Edycja</a>
+                <a asp-action="Delete" asp-route-idz="@item.Id_zamowienia" class="btn btn-warning">Usuń</a>
             </td>
         </tr>
         }

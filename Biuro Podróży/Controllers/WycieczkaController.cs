@@ -50,7 +50,7 @@ namespace Biuro_Podróży.Controllers
 
             return View(wycieczka);
         }
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             ViewData["Id_jedzenia"] = new SelectList(_context.Jedzenie, "Id_jedzenia", "Nazwa");
@@ -60,7 +60,7 @@ namespace Biuro_Podróży.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create([Bind("Id_wycieczki,Miejsce,Data_start,Data_end,Cena,Opis,Id_jedzenia,Id_zakwaterowania")] Wycieczka wycieczka, IFormFile Image)
         {
             string filename = Path.GetFileName(Image.FileName);
@@ -90,7 +90,7 @@ namespace Biuro_Podróży.Controllers
             ViewData["Id_zakwaterowania"] = new SelectList(_context.Zakwaterowanie, "Id_zakwaterowania", "Nazwa", wycieczka.Id_zakwaterowania);
             return View(wycieczka);
         }
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -110,7 +110,7 @@ namespace Biuro_Podróży.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int id, [Bind("Id_wycieczki,Miejsce,Data_start,Data_end,Cena,Opis,Id_jedzenia,Id_zakwaterowania")] Wycieczka wycieczka, IFormFile Image)
         {
             if (id != wycieczka.Id_wycieczki)
@@ -139,7 +139,7 @@ namespace Biuro_Podróży.Controllers
                         ViewData["Id_zakwaterowania"] = new SelectList(_context.Zakwaterowanie, "Id_zakwaterowania", "Nazwa", wycieczka.Id_zakwaterowania);
                         return View();
                     }
-                    _context.Add(wycieczka);
+                    _context.Update(wycieczka);
                     await _context.SaveChangesAsync();
                     
                 }
@@ -161,6 +161,7 @@ namespace Biuro_Podróży.Controllers
             return View(wycieczka);
         }
         [Authorize]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -179,7 +180,8 @@ namespace Biuro_Podróży.Controllers
 
             return View(wycieczka);
         }
-        [Authorize]
+
+        [Authorize(Roles = "Admin")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

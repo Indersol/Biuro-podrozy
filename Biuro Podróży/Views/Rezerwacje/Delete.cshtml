@@ -1,0 +1,39 @@
+﻿@model Biuro_Podróży.Models.Wycieczka_Klient
+
+@{
+    ViewData["Title"] = "Usuń";
+}
+
+<h2>Usuń</h2>
+
+<h3>Czy na pewno chcesz usunąć rezerwację?</h3>
+<div>
+
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Bilety)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Bilety)
+        </dd>
+        <dt>
+            Użytkownik
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ApplicationUser.UserName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Wycieczka)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Wycieczka.Miejsce)
+        </dd>
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id_zamowienia" />
+        <input type="submit" value="Usuń" class="btn btn-primary" /> 
+        <a asp-action="Wszystskie" class="btn btn-warning">Powrót</a>
+    </form>
+</div>

@@ -1,25 +1,40 @@
 ﻿@using Microsoft.AspNetCore.Http;
 @model IEnumerable<Biuro_Podróży.Models.Wycieczka>
+@inject SignInManager<ApplicationUser> signinManager;
 @{
     ViewData["Title"] = "Wycieczki";
 }
-<h2>Wycieczki</h2>
 
-<a asp-action="Create" asp-controller="Wycieczka" style="width:auto" class="btn btn-info">Dodaj wycieczkę</a>
+    <div class="container" align="center">
+        <h2>Wycieczki</h2>
+        @if (signinManager.IsSignedIn(User) && User.IsInRole("Admin"))
+        {
+            <a asp-action="Create" asp-controller="Wycieczka" class="btn btn-info" style="width:auto">Dodaj wycieczkę</a>
+        }
+        <hr />
+        @foreach (var wycieczka in Model)
+        {
+            <div style="width:auto; margin-top:8vh; box-shadow: 0 15px 20px rgba(0, 0, 0, 0.3);
+            margin-bottom:5vh;font-weight:bold;color: white;text-shadow: 2px 2px 4px #000000;">
 
-<div class="center-block" align="center">
-    @foreach (var wycieczka in Model)
-    {
-    <div class="center-block">
-        <div class="card-header">
-            <h3>@wycieczka.Miejsce</h3>
-        </div>
-        <img class="card-img-top" style="width:500px" src="data:image/jpg;base64,@Convert.ToBase64String(wycieczka.Image)" />
-        <div class="card-footer text-center">
-            <a asp-action="Details" asp-controller="Wycieczka" asp-route-id="@wycieczka.Id_wycieczki" class="btn btn-info">Szczegóły</a>
-            <a asp-action="Edit" asp-controller="Wycieczka" asp-route-id="@wycieczka.Id_wycieczki" class="btn btn-primary">Edycja</a>
-            <a asp-action="Delete" asp-controller="Wycieczka" asp-route-id="@wycieczka.Id_wycieczki" class="btn btn-warning">Usuń</a>
-        </div>
+                <a asp-action="Details" asp-controller="Wycieczka" asp-route-id="@wycieczka.Id_wycieczki">
+                    <img class="card-img-top" src="data:image/jpg;base64,@Convert.ToBase64String(wycieczka.Image)" alt="Card image" style="width:100%">
+                </a>
+
+                <div style="padding:5%; background-image: linear-gradient(#1c1c1a, #3b3b39, #3b3b39, #1c1c1a);">
+                    <div>
+                        <h4 class="card-title">@wycieczka.Miejsce</h4>
+                    </div>
+                    <div>
+                        <p>@wycieczka.Opis</p>
+                        <a asp-action="Details" asp-controller="Wycieczka" asp-route-id="@wycieczka.Id_wycieczki" class="btn btn-info">Szczegóły</a>
+                        @if (signinManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                        {
+                            <a asp-action="Edit" asp-controller="Wycieczka" asp-route-id="@wycieczka.Id_wycieczki" class="btn btn-primary">Edycja</a>
+                            <a asp-action="Delete" asp-controller="Wycieczka" asp-route-id="@wycieczka.Id_wycieczki" class="btn btn-warning">Usuń</a>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
     </div>
-    }
-</div>
