@@ -6,12 +6,12 @@
 
 <h2>Lista rezerwacji</h2>
 
-<p>
-    <a asp-action="Create">Dodaj rezerwację</a>
-</p>
 <table class="table">
     <thead>
         <tr>
+            <th>
+                Klient
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Bilety)
             </th>
@@ -22,8 +22,12 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+        @foreach (var item in Model)
+        {
         <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ApplicationUser.UserName)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Bilety)
             </td>
@@ -31,11 +35,11 @@
                 @Html.DisplayFor(modelItem => item.Wycieczka.Miejsce)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id_zamowienia">Edycja</a> |
-                <a asp-action="Details" asp-route-id="@item.Id_zamowienia">Szczegóły</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id_zamowienia">Usuń</a>
+                <a asp-action="Edit" asp-route-id="@item.Id_zamowienia" class="btn btn-primary">Edycja</a>
+                <a asp-action="Details" asp-route-id="@item.Id_zamowienia" class="btn btn-info">Szczegóły</a>
+                <a asp-action="Delete" asp-route-id="@item.Id_zamowienia" class="btn btn-warning">Usuń</a>
             </td>
         </tr>
-}
+        }
     </tbody>
 </table>

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Biuro_Podróży.Controllers
@@ -15,10 +16,12 @@ namespace Biuro_Podróży.Controllers
     {
         private readonly UserManager<ApplicationUser> userManager;
         private readonly SignInManager<ApplicationUser> signinManager;
-        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signinManager)
+        private readonly RoleManager<IdentityRole> roleManager;
+        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signinManager, RoleManager<IdentityRole> roleManager)
         {
             this.userManager = userManager;
             this.signinManager = signinManager;
+            this.roleManager = roleManager;
         }
 
         [HttpPost]
@@ -57,10 +60,17 @@ namespace Biuro_Podróży.Controllers
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await userManager.CreateAsync(user, model.Password);
+                var role = await roleManager.FindByNameAsync("Klient");
 
+                if (role == null)
+                {
+                    ViewBag.ErrorMessage = $"Nie znaleziono uprawnienia";
+                    return View("NotFound");
+                }
                 if (result.Succeeded)
                 {
                     await signinManager.SignInAsync(user, isPersistent: false);
+                    await userManager.AddToRoleAsync(user, role.Name);
                     return RedirectToAction("index", "home");
                 }
                 foreach (var error in result.Errors)
@@ -72,13 +82,77 @@ namespace Biuro_Podróży.Controllers
         }
 
         [HttpGet]
-        public IActionResult Logowanie()
+        public async Task<IActionResult> Login(string returnUrl)
         {
-            return View();
+            LoginViewModel model = new LoginViewModel
+            {
+                ReturnUrl = returnUrl,
+                ExternalLogins =(await signinManager.GetExternalAuthenticationSchemesAsync()).ToList()
+            };
+            return View(model);
+        }
+        [HttpPost]
+        public IActionResult ExternalLogin(string provider, string returnUrl)
+        {
+            var redirectUrl = Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl });
+            var properties = signinManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl);
+            return new ChallengeResult(provider, properties);
+        }
+
+        public async Task<IActionResult> ExternalLoginCallback(string returnUrl = null, string remoteError = null)
+        {
+            returnUrl = returnUrl ?? Url.Content("~/");
+            LoginViewModel loginViewModel = new LoginViewModel
+            {
+                ReturnUrl = returnUrl,
+                ExternalLogins = (await signinManager.GetExternalAuthenticationSchemesAsync()).ToList()
+            };
+            if(remoteError != null)
+            {
+                ModelState.AddModelError(string.Empty, $"Błąd: {remoteError}");
+                return View("Login", loginViewModel);
+            }
+            var info = await signinManager.GetExternalLoginInfoAsync();
+            if(info == null)
+            {
+                ModelState.AddModelError(string.Empty, "Błąd logowania");
+                return View("Login", loginViewModel);
+            }
+            var signInResult = await signinManager.ExternalLoginSignInAsync(info.LoginProvider,
+                info.ProviderKey, isPersistent: false, bypassTwoFactor: true);
+            if(signInResult.Succeeded)
+            {
+                return LocalRedirect(returnUrl);
+            }
+            else
+            {
+                var email = info.Principal.FindFirstValue(ClaimTypes.Email);
+                if(email!= null)
+                {
+                    var user = await userManager.FindByEmailAsync(email);
+                    var role = await roleManager.FindByNameAsync("Klient");
+                    if (user == null)
+                    {
+                        user = new ApplicationUser
+                        {
+                            UserName = info.Principal.FindFirstValue(ClaimTypes.Email),
+                            Email = info.Principal.FindFirstValue(ClaimTypes.Email)
+                        };
+                        await userManager.CreateAsync(user);
+                        await userManager.AddToRoleAsync(user, role.Name);
+                    }
+                    await userManager.AddLoginAsync(user, info);
+                    await signinManager.SignInAsync(user, isPersistent: false);
+                    return LocalRedirect(returnUrl);
+                }
+                ViewBag.ErrorTitle = $"Nie można pobrać maila od {info.LoginProvider}";
+                ViewBag.ErrorMessage = $"Skontaktuj sie z administratorem systemu";
+                return View("Error");
+            }
         }
 
         [HttpPost]
-        public async Task<IActionResult> Logowanie(LoginViewModel model, string returnUrl)
+        public async Task<IActionResult> Login(LoginViewModel model, string returnUrl)
         {
             if (ModelState.IsValid)
             {
@@ -100,6 +174,11 @@ namespace Biuro_Podróży.Controllers
             return View(model);
         }
 
+        [HttpGet]
+        public IActionResult AccessDenied()
+        {
+            return View();
+        }
     }
 }
 

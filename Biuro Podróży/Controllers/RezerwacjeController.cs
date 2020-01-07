@@ -26,9 +26,14 @@ namespace Biuro_Podróży.Controllers
                 .Where(w => w.ApplicationUser.Id == currentUser.FindFirst(ClaimTypes.NameIdentifier).Value);
             return View(await biuroContext.ToListAsync());
         }
+        public async Task<IActionResult> Wszystkie()
+        {
+            var biuroContext = _context.Wycieczka_Klient.Include(w => w.Wycieczka).Include(k => k.ApplicationUser);
+            return View(await biuroContext.ToListAsync());
+        }
 
         [Authorize]
-        public IActionResult Create(int? id)
+        public IActionResult RKlient(int? id)
         {
             if (id == null)
             {
@@ -40,7 +45,7 @@ namespace Biuro_Podróży.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public async Task<IActionResult> Create(int id, [Bind("Id_zamowienia,Id_usera,Id_wycieczki,Bilety")] Wycieczka_Klient wycieczka_Klient)
+        public async Task<IActionResult> RKlient(int id, [Bind("Id_zamowienia,Id_usera,Id_wycieczki,Bilety")] Wycieczka_Klient wycieczka_Klient)
         {
 
             if (ModelState.IsValid)

@@ -31,8 +31,10 @@
                 </td>
                 <td>
                     <div class="card-footer text-center">
-                        <a asp-action="EdytujRole" asp-controller="Admin" asp-route-id="@item.Id" class="btn btn-primary">Edycja</a>
-                        <a asp-action="UsunRole" asp-controller="Admin" asp-route-id="@item.Id" class="btn btn-warning">Usuń</a>
+                        <form asp-action="UsunRole" asp-route-id="@item.Id" method="post">
+                            <a asp-action="EdytujRole" asp-controller="Admin" asp-route-id="@item.Id" class="btn btn-primary">Edycja</a>
+                            <button type="submit" class="btn btn-warning">Usuń</button>
+                        </form>
                     </div>
                 </td>
             </tr>

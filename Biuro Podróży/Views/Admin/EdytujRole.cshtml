@@ -1,4 +1,4 @@
-﻿@model Biuro_Podróży.ViewModel.EditRoleViewModel
+﻿@model EditRoleViewModel
 @{
     ViewData["Title"] = "EdytujRole";
 }
@@ -22,18 +22,19 @@
     </form>
 </div>
 <h3>Użytkownicy</h3>
+<a asp-controller="Admin" asp-action="EdytujListeUpr" asp-route-roleId="@Model.Id"
+   style="width:auto" class="btn btn-primary">Edytuj listę</a>
 <div>
     @if (Model.Users.Any())
     {
         foreach (var user in Model.Users)
         {
-            <h5 class="row">@User</h5>
+            <h5 class="row">@user</h5>
         }
     }
     else
     {
         <h3>Brak użytkowników</h3>
     }
-
 </div>
         

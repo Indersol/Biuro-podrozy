@@ -1,0 +1,45 @@
+﻿@model IEnumerable<ApplicationUser>
+@{
+    ViewData["Title"] = "Klienci";
+}
+
+<h2>Klienci</h2>
+@if (Model.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Id
+                </th>
+                <th>
+                    Nazwa użytkownika
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserName)
+                    </td>
+                    <td>
+                        <form asp-action="UsunUsera" asp-route-id="@item.Id" method="post">
+                            <a asp-action="EdytujUsera" asp-controller="Admin" asp-route-id="@item.Id" class="btn btn-primary">Edycja</a>
+                            <button type="submit" class="btn btn-warning">Usuń</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <h2>Brak użytkowników</h2>
+}

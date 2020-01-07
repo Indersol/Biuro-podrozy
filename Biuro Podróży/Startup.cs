@@ -48,6 +48,12 @@ namespace Biuro_Podróży
                 options.Filters.Add(new AuthorizeFilter(policy));
             }).SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
+            services.AddAuthentication().AddGoogle(options =>
+                {
+                    options.ClientId = "541730728971-skajpp7f2qs89aj55gs7cb8587qr0jfc.apps.googleusercontent.com";
+                    options.ClientSecret = "7SHIwGj1f9ttDWkxANYOpFCk";
+                });
+
             services.AddDbContextPool<BiuroContext>(options => options.UseSqlServer(connection));
             services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<BiuroContext>();
 
