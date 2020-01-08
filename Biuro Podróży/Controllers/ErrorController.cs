@@ -18,6 +18,9 @@ namespace Biuro_Podróży.Controllers
                 case 404:
                     ViewBag.ErrorMessage = "Błąd 404";
                     break;
+                case 500:
+                    ViewBag.ErrorMessage = "Błąd 500";
+                    break;
             }
             return View("Notfound");
         }

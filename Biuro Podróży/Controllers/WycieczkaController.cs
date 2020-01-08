@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Authorization;
 using Biuro_Podróży.ViewModel;
 using Microsoft.AspNetCore.Hosting;
 using System.IO;
+using System.Security.Claims;
 
 namespace Biuro_Podróży.Controllers
 {
@@ -38,7 +39,6 @@ namespace Biuro_Podróży.Controllers
             {
                 return NotFound();
             }
-
             var wycieczka = await _context.Wycieczka
                 .Include(w => w.Jedzenie)
                 .Include(w => w.Zakwaterowanie)
@@ -47,7 +47,6 @@ namespace Biuro_Podróży.Controllers
             {
                 return NotFound();
             }
-
             return View(wycieczka);
         }
         [Authorize(Roles = "Admin")]

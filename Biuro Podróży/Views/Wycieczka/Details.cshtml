@@ -12,13 +12,28 @@
        background-image: linear-gradient(#1c1c1a, #3b3b39, #3b3b39, #1c1c1a);">
         <img class="card-img-top" src="data:image/jpg;base64,@Convert.ToBase64String(@Model.Image)" alt="Card image" style="width: 100%">
         <div style="background-image: linear-gradient(#1c1c1a, #3b3b39, #3b3b39, #1c1c1a);">
-            <h1 class="card-title">@Model.Miejsce</h1>
-            <p>Data: @String.Format("{0:dd/MM/yyyy}", @Model.Data_start) - @String.Format("{0:dd/MM/yyyy}", @Model.Data_end)</p>
-            <p>Zakwaterowanie: @Model.Zakwaterowanie.Nazwa</p>
-            <p>Jedzenie: @Model.Jedzenie.Nazwa</p>
-            <p>Cena: @Model.Cena zł</p>
-            <p>Opis</p>
-            <p> @Model.Opis</p>
+            <div class="row" style="min-height:400px">
+                <div class="col-lg-8">
+                    <h1 class="card-title">@Model.Miejsce</h1>
+                    <p>Data: @String.Format("{0:dd/MM/yyyy}", @Model.Data_start) - @String.Format("{0:dd/MM/yyyy}", @Model.Data_end)</p>
+                    <p>Zakwaterowanie: @Model.Zakwaterowanie.Nazwa</p>
+                    <p>Jedzenie: @Model.Jedzenie.Nazwa</p>
+                    <p>Cena: @Model.Cena zł</p>
+                    <p>Opis</p>
+                    <p> @Model.Opis</p>
+                    <br />
+                    <br />
+                </div>
+                <div class="col-lg-3">
+                    <p>Kod QR do płatności</p>
+                    <hr />
+                    <div style="height:100px" id="qrcode"></div>
+                    <script type="text/javascript">
+                        new QRCode(document.getElementById("qrcode"), "https://www.paypal.com/pl/home");
+                    </script>
+
+                </div>
+            </div>
         </div>
         <div style="background-image: linear-gradient(#1c1c1a, #3b3b39, #3b3b39, #1c1c1a);">
             @if (signinManager.IsSignedIn(User) && User.IsInRole("Admin"))
@@ -26,7 +41,7 @@
                 <a asp-action="Edit" asp-controller="Wycieczka" asp-route-id="@Model.Id_wycieczki" class="btn btn-primary">Edycja</a>
                 <a asp-action="Delete" asp-controller="Wycieczka" asp-route-id="@Model.Id_wycieczki" class="btn btn-warning">Usuń</a>
             }
-            @if (signinManager.IsSignedIn(User))
+            @if (signinManager.IsSignedIn(User) && User.IsInRole("Klient"))
             {
                 <a asp-action="RKlient" asp-controller="Rezerwacje" asp-route-id="@Model.Id_wycieczki" class="btn btn-success">Zamów</a>
             }
