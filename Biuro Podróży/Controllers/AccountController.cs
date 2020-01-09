@@ -69,8 +69,8 @@ namespace Biuro_Podróży.Controllers
                 }
                 if (result.Succeeded)
                 {
-                    await signinManager.SignInAsync(user, isPersistent: false);
                     await userManager.AddToRoleAsync(user, role.Name);
+                    await signinManager.SignInAsync(user, isPersistent: false);
                     return RedirectToAction("index", "home");
                 }
                 foreach (var error in result.Errors)
@@ -171,7 +171,7 @@ namespace Biuro_Podróży.Controllers
                 }
                 ModelState.AddModelError(string.Empty, "Błąd logowania");
             }
-            return View(model);
+            return RedirectToAction("BadPass");
         }
 
         [HttpGet]
@@ -179,6 +179,67 @@ namespace Biuro_Podróży.Controllers
         {
             return View();
         }
+        [HttpGet]
+        public IActionResult BadPass()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EdycjaKonta()
+        {
+            ClaimsPrincipal currentUser = this.User;
+            var user = await userManager.FindByNameAsync(currentUser.Identity.Name);
+            if (user == null)
+            {
+                ViewBag.ErrorMessage = $"Nie znaleziono użytkownika";
+                return View("NotFound");
+            }
+            var userRoles = await userManager.GetRolesAsync(user);
+            var model = new EditUserViewModel
+            {
+                Id = user.Id,
+                Email = user.Email,
+                Imie = user.Imie,
+                Nazwisko = user.Nazwisko,
+                Miasto = user.Miasto,
+                NrTel = user.NrTel,
+                Roles = userRoles
+            };
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EdycjaKonta(EditUserViewModel model)
+        {
+            var user = await userManager.FindByIdAsync(model.Id);
+            if (user == null)
+            {
+                ViewBag.ErrorMessage = $"Nie znaleziono użytkownika";
+                return View("NotFound");
+            }
+            else
+            {
+                user.Email = model.Email;
+                user.Imie = model.Imie;
+                user.Nazwisko = model.Nazwisko;
+                user.Miasto = model.Miasto;
+                user.NrTel = model.NrTel;
+                var result = await userManager.UpdateAsync(user);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+                return View(model);
+            }
+        }
+
+
+
     }
 }
 

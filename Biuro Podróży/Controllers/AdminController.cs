@@ -7,6 +7,7 @@ using Biuro_Podróży.ViewModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -48,7 +49,6 @@ namespace Biuro_Podróży.Controllers
             {
                 Id = user.Id,
                 Email = user.Email,
-                UserName = user.UserName,
                 Roles = userRoles
             };
             return View(model);
@@ -66,7 +66,6 @@ namespace Biuro_Podróży.Controllers
             else
             {
                 user.Email = model.Email;
-                user.UserName = model.UserName;
                 var result = await userManager.UpdateAsync(user);
                 if(result.Succeeded)
                 {

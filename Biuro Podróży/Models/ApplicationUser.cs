@@ -11,5 +11,6 @@ namespace Biuro_Podróży.Models
         public string Imie { get; set; }
         public string Nazwisko { get; set; }
         public string Miasto { get; set; }
+        public string NrTel { get; set; }
     }
 }

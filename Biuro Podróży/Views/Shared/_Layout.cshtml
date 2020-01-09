@@ -34,7 +34,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">#MagicznePodróże</a>
+                <a class="navbar-brand" asp-controller="Home" asp-action="Index">#MagicznePodróże</a>
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
@@ -48,6 +48,7 @@
                     @if (signinManager.IsSignedIn(User) && User.IsInRole("Klient"))
                     {
                         <li><a asp-area="" asp-controller="Rezerwacje" asp-action="Moje">Zarządzaj rezerwacjami</a></li>
+                        <li><a asp-area="" asp-controller="Account" asp-action="Edycjakonta">Ustawienia</a></li>
                     }
                     <li><a asp-area="" asp-controller="Home" asp-action="Privacy">Polityka prywatności</a></li>
                 </ul>

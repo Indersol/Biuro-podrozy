@@ -18,6 +18,10 @@ namespace Biuro_Podróży.ViewModel
         public string UserName { get; set; }
         [Required]
         public string Email { get; set; }
+        public string Imie { get; set; }
+        public string Nazwisko { get; set; }
+        public string Miasto { get; set; }
+        public string NrTel { get; set; }
         public IList<string> Roles { get; set; }
 
     }
