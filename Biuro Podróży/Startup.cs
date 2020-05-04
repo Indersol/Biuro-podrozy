@@ -40,7 +40,7 @@ namespace Biuro_Podróży
                 options.Password.RequiredUniqueChars = 0;
                 options.Password.RequireNonAlphanumeric = false;
             });
-
+            
             services.AddMvc(options =>
             {
                 var policy = new AuthorizationPolicyBuilder()
@@ -67,10 +67,12 @@ namespace Biuro_Podróży
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.AddEfDiagrams<BiuroContext>();
             }
             else
             {
                 app.UseStatusCodePagesWithReExecute("/Error/{0}");
+                app.AddEfDiagrams<BiuroContext>();
                 //app.UseExceptionHandler("/Home/Error");
                 //app.UseHsts();
             }
